@@ -41,6 +41,8 @@ class tree:
 			print(array)
 
 	def get_tree_array_sorted(self, cur_node, array=[]):
+		if(self.root==None):
+			return 
 		if(cur_node!=None):
 			self.get_tree_array_sorted(cur_node.l_child, array)
 			array.append(cur_node.value)
