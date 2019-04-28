@@ -4,6 +4,16 @@ class node:
 		self.r_child=None
 		self.l_child=None
 
+		self.leaf=False
+
+	def is_leaf(self):
+		if(self.r_child == None and self.l_child == None):
+			self.leaf=True
+			return True
+		else:
+			self.leaf=False
+			return False
+
 class tree:
 	def __init__(self):
 		self.root=None
@@ -16,11 +26,11 @@ class tree:
 				if(cur_node.l_child==None):
 					cur_node.l_child=node(value)
 				else:
-					self.insert(value, cur_node.l_child)	
+					self.insert(value, cur_node.l_child)    
 			elif(value>cur_node.value):
 				if(cur_node.r_child==None):
 					cur_node.r_child=node(value)
-				else:	
+				else:   
 					self.insert(value, cur_node.r_child)
 			else:
 				return False
@@ -28,17 +38,13 @@ class tree:
 	def get_tree_array(self, cur_node, array=[]):
 		if(self.root==None):
 			return []
+		if(cur_node!=None):
+			self.get_tree_array(cur_node.l_child, array)
+			self.get_tree_array(cur_node.r_child, array)
+			array.append(cur_node.value)
+			return array
 		else:
-			if(cur_node!=None):
-				self.get_tree_array(cur_node.l_child, array)
-				self.get_tree_array(cur_node.r_child, array)
-				array.append(cur_node.value)
-				return array
-			else:
-				return array
-
-		if(cur_node==self.root):
-			print(array)
+			return array
 
 	def get_tree_array_sorted(self, cur_node, array=[]):
 		if(self.root==None):
@@ -50,15 +56,22 @@ class tree:
 			return array
 
 	def get_max_height(self, cur_node, cur_height=1, max_height=1):
-		if(cur_node!=None):
-			max_height = self.get_max_height(cur_node.l_child, cur_height + 1, max_height)
-			max_height = self.get_max_height(cur_node.r_child, cur_height + 1, max_height)
+		if(self.root==None):
+			return 0
 
-			if(cur_height >= max_height):
+		def check_cur_max(cur_height, max_height):
+			if(cur_height > max_height):
 				max_height = cur_height
 			return max_height
+
+		if(cur_node!=None):
+			max_height = self.get_max_height(cur_node.l_child, cur_height + 1, max_height)
+			max_height = check_cur_max(cur_height, max_height)
+			max_height = self.get_max_height(cur_node.r_child, cur_height + 1, max_height)
+			max_height = check_cur_max(cur_height, max_height)
+			return max_height
 		else:
-			return 0
+			return max_height
 
 	def get_root(self):
 		return self.root.value 
