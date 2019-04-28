@@ -42,17 +42,31 @@ class tree:
 
 	def get_tree_array_sorted(self, cur_node, array=[]):
 		if(self.root==None):
-			return 
+			return []
 		if(cur_node!=None):
 			self.get_tree_array_sorted(cur_node.l_child, array)
 			array.append(cur_node.value)
 			self.get_tree_array_sorted(cur_node.r_child, array)
 			return array
 
+	def get_max_height(self, cur_node, cur_height=0,max_height=0):
+		if(cur_node!=None):
+			max_height = self.get_max_height(cur_node.l_child, cur_height + 1, max_height)
+			max_height = self.get_max_height(cur_node.r_child, cur_height + 1, max_height)
+			
+			if(cur_height >= max_height):
+				max_height = cur_height
+			return max_height
+		else:
+			return 0
+
 
 	def get_root(self):
 		return self.root.value 
 
+	def fill_with_array(self, array=[]):
+		for x in array:
+			self.insert(x, self.root)
 
 	def fill_with_random(self, size, min_range, max_range):
 		from random import randint

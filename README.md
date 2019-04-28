@@ -24,7 +24,7 @@ And thats it! Now you can start playing with the awesome functions it has!
 ```
 
 ### get_tree_array
-`get_tree_array` is pretty self explanatory, it returns the tree in an array.
+`get_tree_array` is pretty self explanatory, it returns the tree in an array as if it were projected on an array under the tree.
 ```python
 >>> result = bt.get_tree_array(bt.root)
 >>> print(result)
@@ -37,6 +37,14 @@ And thats it! Now you can start playing with the awesome functions it has!
 >>> result = bt.get_tree_array_sorted(bt.root)
 >>> print(result)
 [89, 110, 136, 459, 574, 748, 803, 929, 946, 966]
+```
+
+### get_max_height
+`get_max_height` returns the maximum height of the tree.
+```python
+>>> result = bt.get_max_height(bt.root)
+>>> print(result)
+5
 ```
 
 ### get_root
