@@ -49,17 +49,16 @@ class tree:
 			self.get_tree_array_sorted(cur_node.r_child, array)
 			return array
 
-	def get_max_height(self, cur_node, cur_height=0,max_height=0):
+	def get_max_height(self, cur_node, cur_height=1, max_height=1):
 		if(cur_node!=None):
 			max_height = self.get_max_height(cur_node.l_child, cur_height + 1, max_height)
 			max_height = self.get_max_height(cur_node.r_child, cur_height + 1, max_height)
-			
+
 			if(cur_height >= max_height):
 				max_height = cur_height
 			return max_height
 		else:
 			return 0
-
 
 	def get_root(self):
 		return self.root.value 
