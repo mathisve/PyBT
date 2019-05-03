@@ -27,13 +27,11 @@ class tree:
 					cur_node.l_child=node(value)
 				else:
 					self.insert(value, cur_node.l_child)    
-			elif(value>cur_node.value):
+			else:
 				if(cur_node.r_child==None):
 					cur_node.r_child=node(value)
 				else:   
 					self.insert(value, cur_node.r_child)
-			else:
-				return False
 
 	def get_tree_array(self, cur_node, array=[]):
 		if(self.root==None):
@@ -65,13 +63,14 @@ class tree:
 			return max_height
 
 		if(cur_node!=None):
-			max_height = self.get_max_height(cur_node.l_child, cur_height + 1, max_height)
+			max_height = self.get_max_height(cur_node.l_child, cur_height, max_height)
 			max_height = check_cur_max(cur_height, max_height)
-			max_height = self.get_max_height(cur_node.r_child, cur_height + 1, max_height)
+			max_height = self.get_max_height(cur_node.r_child, cur_height, max_height)
 			max_height = check_cur_max(cur_height, max_height)
-			return max_height
+			return max_height + 1
 		else:
 			return max_height
+
 
 	def get_root(self):
 		return self.root.value 
